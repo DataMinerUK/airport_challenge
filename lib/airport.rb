@@ -10,14 +10,14 @@ class Airport
   end
 
   def take_off plane
-    fail 'Too stormy to take off' if current_weather == 'stormy'
+    fail 'Too stormy to take off' if stormy?
     fail 'The plane is not at the airport' unless planes.include?(plane)
     planes.delete(plane)
     plane.take_off
   end
 
   def landing plane
-    fail 'Too stormy to land' if current_weather == 'stormy'
+    fail 'Too stormy to land'     if stormy?
     fail 'Cannot land plane. Airport is full' if full?
     planes << plane
     plane.land
@@ -32,8 +32,12 @@ class Airport
   end
 
   def current_weather
-    weather_conditions = ['sunny','stormy']
-    weather_conditions[rand(weather_conditions.length)]
+    @weather_conditions = ['sunny','stormy']
+    [rand(weather_conditions.length)]
+  end
+
+  def stormy?
+    current_weather == 'stormy'
   end
 
   private
@@ -41,3 +45,4 @@ class Airport
   attr_reader :planes
 
 end
+

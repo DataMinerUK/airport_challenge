@@ -5,19 +5,23 @@ class Plane
   end
 
   def flying?
-    @flying
+    flying
   end
 
   def land
-    @flying = false
+    self.flying = false
   end
 
   def landed?
-    !@flying
+    !flying
   end
 
   def take_off
-    @flying = true
+    self.flying = true
   end
+
+  private
+
+  attr_accessor :flying
 
 end
